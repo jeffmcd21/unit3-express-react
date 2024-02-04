@@ -61,7 +61,7 @@ app.post("/people", async (req, res) => {
     }
 });
 
-// PEOPLE CREATE ROUTE
+// PEOPLE UPDATE ROUTE
 app.put("/people/:id", async (req, res) => {
     try {
       res.json(
@@ -72,12 +72,24 @@ app.put("/people/:id", async (req, res) => {
     }
   });
 
-// PEOPLE CREATE ROUTE
+
+// PEOPLE DELETE ROUTE
 app.delete("/people/:id", async (req, res) => {
     try {
       res.json(await People.findByIdAndRemove(req.params.id));
     } catch (error) {
       res.status(400).json(error)
+    }
+  });
+
+// PEOPLE INDEX ROUTE
+app.get("/people/:id", async (req, res) => {
+    try {
+      // send all people
+      res.json(await People.findById(req.params.id));
+    } catch (error) {
+      //send error
+      res.status(400).json(error);
     }
   });
 
